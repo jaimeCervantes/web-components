@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web components: Shadow Dom ONLY 1</title>
+</head>
+<body>
+  <div id="test"><h3>Light DOM</h3></div>
+  <script>
+    (function(){
+      var div = document.getElementById('test');
+      var divRoot = div.createShadowRoot();
+      divRoot.innerHTML = '<style>h3{color: red;}</style><h3>Shadow DOM</h3>';
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web components: Shadow Dom ONLY 2</title>
+</head>
+<body>
+  <style>
+    /*Styles defined in the parent page have higher specificity than :host rules; */
+    .red {
+      /*text-transform: lowercase;*/
+    }
+  </style>
+  <button id="test" class="red">My button</button>
+  <script>
+    (function(){
+      var button = document.getElementById('test');
+      var buttonRoot = button.createShadowRoot();
+      buttonRoot.innerHTML = '<style>' +
+                              ':host { text-transform: uppercase; }' +
+                            '</style>' +
+                            '<content></content>';
+    })();
+  </script>
+</body>
+</html>

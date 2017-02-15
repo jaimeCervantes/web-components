@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web components: template</title>
+</head>
+<body>
+  <template id="tpl-prueba">
+    <div>
+      <h1>Hola, mi primer template</h1>
+      <p>¿Cómo estas?</p>
+    </div>
+  </template>
+  <div id="host">
+      
+  </div>
+  <script>
+    (function(){
+      var tpl = document.getElementById("tpl-prueba");
+      var host = document.getElementById("host");
+      var tplInst = document.importNode(tpl.content, true);
+      host.appendChild(tplInst);
+    })();
+  </script>
+</body>
+</html>

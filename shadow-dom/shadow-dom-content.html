@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web components: Shadow Dom content</title>
+</head>
+<body>
+  <style>
+  </style>
+  <div id="test">Light DOM</button>
+  <script>
+    (function(){
+      var div = document.getElementById('test');
+      var divRoot = div.createShadowRoot();
+      divRoot.innerHTML = "<style>span{ color: red;}</style><span>Shadow DOM</span> " +
+                          "<content></content>";
+    })();
+  </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Web components: import</title>
 	<script>
 		(function(){
 			if('registerElement' in document
@@ -22,8 +22,8 @@
 		};
 
 		var handleError = function(e){
-			console.log(e);
 			console.log("Error loading import: " + e.target.href );
+			console.log(e);
 		}
 	</script>
 	<link onload="handleLoad(event)" onerror="handleError(event)" rel="import" href="./bootstrap.html">
