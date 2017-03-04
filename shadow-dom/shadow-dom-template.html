@@ -4,7 +4,25 @@
   <title>Web components: Shadow Dom template</title>
 </head>
 <body>
-  <template>
+  <template id="tpl">
+    <h1>h1 en shadow-dom</h1>
+    <p>Parrafo</p>
+    <img src="https://i0.wp.com/blog.hostdime.com.co/wp-content/uploads/nodejs-servidor.png" alt="">
   </template>
+  <div id="host">
+    
+  </div>
+  <script>
+    ;(function() {
+       'use strict';
+
+      var tpl = document.getElementById('tpl');
+      var host = document.getElementById('host');
+      var shadowDom = host.createShadowRoot();
+      var content = document.importNode(tpl.content, true);
+      shadowDom.appendChild(content);
+      
+     }()); 
+  </script>
 </body>
 </html>
