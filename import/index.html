@@ -8,15 +8,15 @@
 				&&'import' in document.createElement('link')
 				&& 'content' in document.createElement('template')) {
 			} else {
-				//polifill the platform
+				//polyfill the platform
 				var scriptPolyfill = document.createElement('script');
-				scriptPolyfill.src = './bower_components/webcomponentsjs/webcomponents-lite.min.js';
+				scriptPolyfill.src = './node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js';
 				document.body.appendChild(scriptPolyfill);
 			}
 		})();
 	</script>
 	<script>
-		var handleLoad = function(e) {
+		const handleLoad = function(e) {
 			console.log("Loaded import: " + e.target.href );
 			console.log(e);
 		};
