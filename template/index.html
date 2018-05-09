@@ -10,14 +10,18 @@
       <p>¿Cómo estas?</p>
     </div>
   </template>
-  <div id="host">
-      
-  </div>
+  
+  <div id="host"></div>
   <script>
     (function(){
-      var tpl = document.getElementById("tpl-prueba");
-      var host = document.getElementById("host");
-      var tplInst = document.importNode(tpl.content, true);
+      const host = document.getElementById("host");
+      const tpl = document.getElementById("tpl-prueba");
+      /**
+       * "document.importNode" is useful when the node to clone comes from another document, for example an iframe
+       * ¿Is "importNode" a good idea for SSR (Server Side Rendering)? I think it isn´t
+       * const tplInst = document.importNode(tpl.content, true);
+       */
+      const tplInst = tpl.content.cloneNode(true);
       host.appendChild(tplInst);
     })();
   </script>
