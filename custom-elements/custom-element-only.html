@@ -18,18 +18,18 @@
       constructor (props) {
         super(props);
         this.addEventListener('click', e => {
-          alert('click sobre mensaje' + (props ? props.msj : ''));
+          alert('click sobre mensaje' + (props ? props.msg : ''));
         });
 
         if (props) {
-          this.innerHTML = props.msj;
+          this.innerHTML = props.msg;
         }
       }
     }
 
     customElements.define('mi-mensaje', MiMensaje);
 
-    document.body.appendChild(new MiMensaje({ msj: 'Hola 2'}));
+    document.body.appendChild(new MiMensaje({ msg: 'Hola 2'}));
 
     const miMensaje = document.createElement('mi-mensaje');
     miMensaje.innerHTML = "HOLA 3";

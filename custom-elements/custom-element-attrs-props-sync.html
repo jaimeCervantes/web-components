@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Custom Elements: Life cycle Methods</title>
+</head>
+<body>
+  <style>
+    mi-mensaje {
+      display:block;
+      border: 2px solid #000;
+    }
+  </style>
+  <mi-mensaje msg="Hola"></mi-mensaje>
+  <script>
+    class MiMensaje extends HTMLElement {
+
+      // property and attribute "msg" in sync
+      get msg () {
+        return this.getAttribute('msg');
+      }
+
+      set msg (value) {
+        this.setAttribute('msg', value);
+      }
+
+      constructor (props) {
+        super(props);
+        this.addEventListener('click', e => {
+          alert(this.msg);
+        });
+
+        if (props && props.msg) {
+          this.msg = props.msg;
+        }
+        this.innerHTML = this.msg;
+      }
+    }
+
+    customElements.define('mi-mensaje', MiMensaje);
+    document.body.appendChild(new MiMensaje({ msg: 'Hola 2' }));
+  </script>
+</body>
+</html>
