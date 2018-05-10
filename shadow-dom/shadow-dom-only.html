@@ -4,12 +4,26 @@
   <title>Web components: Shadow Dom ONLY 1</title>
 </head>
 <body>
+  <style>
+    /*Styles outside don´t affect style inside the shadow DOM; */
+    .red {
+      color: blue;
+      text-transform: lowercase;
+    }
+  </style>
   <div id="test"><h3>Light DOM</h3></div>
+  <p>Because we didn't add "&lt;slot&gt;" tags in our shadow dom, "Light DOM" isn't shown</p>
   <script>
     (function(){
       var div = document.getElementById('test');
-      var divRoot = div.createShadowRoot();
-      divRoot.innerHTML = '<style>h3{color: red;}</style><h3>Shadow DOM</h3>';
+      var divRoot = div.attachShadow({ mode: 'open' });
+      divRoot.innerHTML = `<style>
+                            .red {
+                              color: red;
+                              text-transform: uppercase;
+                            }
+                            </style>
+                            <h3 class="red">Shadow DOM</h3>`;
     })();
   </script>
 </body>

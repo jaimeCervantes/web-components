@@ -6,13 +6,16 @@
 <body>
   <style>
   </style>
-  <div id="test">Light DOM</button>
+  <div id="test">Light DOM</div>
   <script>
     (function(){
       var div = document.getElementById('test');
-      var divRoot = div.createShadowRoot();
-      divRoot.innerHTML = "<style>span{ color: red;}</style><span>Shadow DOM</span> " +
-                          "<content></content>";
+      var divRoot = div.attachShadow({ mode: 'open' });
+      divRoot.innerHTML = `<style>
+                            span { color: red;}
+                          </style>
+                          <span>Shadow DOM</span>
+                          <slot></slot>`;
     })();
   </script>
 </body>

@@ -4,21 +4,16 @@
   <title>Web components: Shadow Dom ONLY 2</title>
 </head>
 <body>
-  <style>
-    /*Styles defined in the parent page have higher specificity than :host rules; */
-    .red {
-      /*text-transform: lowercase;*/
-    }
-  </style>
   <button id="test" class="red">My button</button>
+  <p>We can't attach shadow DOM to all elements, &lt;button&gt; is an example</p>
   <script>
     (function(){
       var button = document.getElementById('test');
-      var buttonRoot = button.createShadowRoot();
+      var buttonRoot = button.attachShadow({ mode: 'open' });
       buttonRoot.innerHTML = '<style>' +
                               ':host { text-transform: uppercase; }' +
                             '</style>' +
-                            '<content></content>';
+                            '<slot></slot>';
     })();
   </script>
 </body>

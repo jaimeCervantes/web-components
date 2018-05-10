@@ -5,12 +5,19 @@
 </head>
 <body>
   <template id="tpl">
+    <slot name="primero"></slot>
     <h1>h1 en shadow-dom</h1>
     <p>Parrafo</p>
     <img src="https://i0.wp.com/blog.hostdime.com.co/wp-content/uploads/nodejs-servidor.png" alt="">
+    <slot name="ultimo"></slot>
   </template>
   <div id="host">
-    
+    <div slot="primero">
+      <h1>Hola en slot[name="primero"]</h1>
+    </div>
+    <div slot="ultimo">
+      <h2>Adios en slot[name="ultimo"]</h2>
+    </div>
   </div>
   <script>
     ;(function() {
@@ -18,10 +25,9 @@
 
       var tpl = document.getElementById('tpl');
       var host = document.getElementById('host');
-      var shadowDom = host.createShadowRoot();
-      var content = document.importNode(tpl.content, true);
+      var shadowDom = host.attachShadow({ mode: 'open' });
+      var content = tpl.content.cloneNode(true)
       shadowDom.appendChild(content);
-      
      }()); 
   </script>
 </body>
