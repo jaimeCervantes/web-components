@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Custom Element only</title>
+</head>
+<body>
+  <style>
+    mi-mensaje {
+      display: block;
+    }
+  </style>
+  <mi-mensaje>Hola</mi-mensaje>
+  <script>
+    class MiMensaje extends HTMLElement {
+      constructor (props) {
+        super(props);
+        this.addEventListener('click', e => {
+          alert('click sobre mensaje' + (props ? props.msj : ''));
+        });
+
+        if (props) {
+          this.innerHTML = props.msj;
+        }
+      }
+    }
+
+    customElements.define('mi-mensaje', MiMensaje);
+
+    document.body.appendChild(new MiMensaje({ msj: 'Hola 2'}));
+
+    const miMensaje = document.createElement('mi-mensaje');
+    miMensaje.innerHTML = "HOLA 3";
+    document.body.appendChild(miMensaje);
+  </script>
+</body>
+</html>
