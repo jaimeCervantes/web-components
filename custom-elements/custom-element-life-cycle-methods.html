@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Custom Element Life Cycle methods</title>
+</head>
+<body>
+  <h1>Custom element life cycle methods</h1>
+  <style>
+    my-quote {
+      cursor:pointer;
+    }
+
+    my-quote:before {
+      content: '"';
+      font-size: 3rem;
+      font-style: italic;
+    }
+
+    .author {
+      margin-top: 5px;
+    }
+  </style>
+  <my-quote></my-quote>
+  <script>
+  class MyQuote extends HTMLElement {
+    static get observedAttributes() {
+      return ['quote', 'author'];
+    }
+
+    get quote() {
+      return this.getAttribute('quote');
+    }
+    set quote(val) {
+      this.setAttribute('quote', val);
+    }
+
+    set author(val) {
+      this.setAttribute('author', val);
+    }
+    
+    constructor() {
+      super();
+      this.addEventListener('click', this.getQuote);
+    }
+
+    printValue(val) {
+      this.innerHTML = val;
+    }
+
+    printAuthor(val) {
+      const author = document.createElement('p');
+      author.classList.add('author');
+      author.innerHTML = val;
+      this.appendChild(author);
+    }
+
+    getQuote(e) {
+      this.quote = 'Loading...'
+      fetch('https://talaikis.com/api/quotes/random/')
+      .then( res => res.json())
+      .then(jsonRes => {
+        this.quote = jsonRes.quote;
+        this.author = jsonRes.author;
+      });
+    }
+    
+    connectedCallback () {
+      this.getQuote();
+    }
+
+    attributeChangedCallback(attrName, oldVal, newVal) {
+      switch(attrName) {
+        case 'quote':
+          this.printValue(newVal);
+          break;
+        case 'author':
+          this.printAuthor(newVal);
+      }
+    }
+
+    disconnectedCallback() {
+      this.removeEventListener('click', this.getQuote);
+      alert('bye!');
+    }
+  }
+
+  customElements.define('my-quote', MyQuote);
+  </script>
+</body>
+</html>
