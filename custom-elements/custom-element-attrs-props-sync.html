@@ -13,34 +13,57 @@
       border: 2px solid #000;
     }
   </style>
+  <h1>Props and attributes in sync</h1>
   <mi-mensaje msg="Hola"></mi-mensaje>
   <script>
     class MiMensaje extends HTMLElement {
 
-      // property and attribute "msg" in sync
+      // only these attributes specified are observed using attributeChangedCallback()
+      static get observedAttributes () {
+        return ['msg'];
+      }
+
+      // property and attribute "msg" in sync, so every time the property in sync
+      // is changed, the value is reflected in the element attribute.
       get msg () {
         return this.getAttribute('msg');
       }
 
       set msg (value) {
+        // Because we are changing the attribute when we do this:
+        // this.msg = someValue
+        // attributeChangedCallback is invoked
         this.setAttribute('msg', value);
       }
-
+      
       constructor (props) {
         super(props);
         this.addEventListener('click', e => {
           alert(this.msg);
         });
-
+        
+        // with this lines a instance using with props as parameter will be able to keep in sync its attributes
         if (props && props.msg) {
           this.msg = props.msg;
         }
-        this.innerHTML = this.msg;
+      }
+
+      printNewValue (val) {
+        this.innerHTML = val;
+      }
+      
+      // this method is invoked if observedAttributes is defined
+      // this method is invoked every time an attribute change
+      attributeChangedCallback(attrName, oldVal, newVal) {
+        this.printNewValue(newVal);
       }
     }
 
     customElements.define('mi-mensaje', MiMensaje);
     document.body.appendChild(new MiMensaje({ msg: 'Hola 2' }));
+    const hola3 = document.createElement('mi-mensaje');
+    hola3.msg = "Hola 3";
+    document.body.appendChild(hola3);
   </script>
 </body>
 </html>
