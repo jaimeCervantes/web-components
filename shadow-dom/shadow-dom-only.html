@@ -15,8 +15,8 @@
   <p>Because we didn't add "&lt;slot&gt;" tags in our shadow dom, "Light DOM" isn't shown</p>
   <script>
     (function(){
-      var div = document.getElementById('test');
-      var divRoot = div.attachShadow({ mode: 'open' });
+      const div = document.getElementById('test');
+      const divRoot = div.attachShadow({ mode: 'open' });
       divRoot.innerHTML = `<style>
                             .red {
                               color: red;

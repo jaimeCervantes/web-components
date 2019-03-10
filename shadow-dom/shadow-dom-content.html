@@ -4,18 +4,22 @@
   <title>Web components: Shadow Dom content</title>
 </head>
 <body>
-  <style>
-  </style>
-  <div id="test">Light DOM</div>
+  <div id="test">
+    <p>Light DOM</p>
+    <span>Span sin estilo</span>
+  </div>
+  
   <script>
     (function(){
-      var div = document.getElementById('test');
-      var divRoot = div.attachShadow({ mode: 'open' });
+      const div = document.getElementById('test');
+      const divRoot = div.attachShadow({ mode: 'open' });
       divRoot.innerHTML = `<style>
                             span { color: red;}
                           </style>
                           <span>Shadow DOM</span>
                           <slot></slot>`;
+
+
     })();
   </script>
 </body>
