@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web components: Lifecycle methods</title>
+</head>
+<body>
+	<mi-mensaje msj="Mi mensaje"></mi-mensaje>
+	<mi-mensaje msj="Mi mensaje" casi-visible></mi-mensaje>
+
+	<script>
+		class MiMensaje extends HTMLElement {
+			constructor() {
+				super();
+				console.log('constructor: cuando el elemento es creado');
+			}
+
+			static get observedAttributes() {
+				return ['msj', 'casi-visible'];
+			}
+
+			attributeChangedCallback(attrName, oldValue, newValue) {
+				if (attrName === 'msj') {
+					this.innerHTML = newValue;
+				}
+
+				if (attrName === 'casi-visible') {
+					this.setCasiVisible();
+				}
+			}
+
+			setCasiVisible() {
+				if (this.casiVisible) {
+					this.style.opacity = 0.3;
+					return;
+				}
+				
+				this.style.opacity = 1;
+			}
+
+			get msj () {
+				return this.getAttribute('msj');
+			}
+
+			set msj (value) {
+				this.setAttribute('msj', value);
+			}
+
+			get casiVisible () {
+				return this.hasAttribute('casi-visible');
+			}
+
+			set casiVisible (value) {
+				if (value) {
+					this.setAttribute('casi-visible', true);
+					return;
+				}
+
+				this.removeAttribute('casi-visible');
+			}
+		}
+
+		// console.log(MiMensaje.observedAttributes);
+		customElements.define('mi-mensaje', MiMensaje);
+	</script>
+
+	<style>
+		mi-mensaje {
+			display: block;
+			border: 3px solid red;
+		}
+
+		mi-mensaje[casi-visible] {
+			border: 3px solid red;
+		}
+	</style>
+</body>
+</html>

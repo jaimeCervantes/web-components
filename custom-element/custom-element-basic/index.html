@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web components: Custom Element Basico</title>
+</head>
+<body>
+	<mi-boton>Soy un mi-boton</mi-boton>
+	<mi-boton>Soy OTRO mi-boton</mi-boton>
+
+	<mi-boton-2>Soy un mi-boton-2</mi-boton-2>
+	
+	<style>
+		body {
+			padding: 20px;
+		}
+
+		mi-boton {
+			padding: 10px;
+			border: 3px solid pink;
+		}
+
+		mi-boton-2 {
+			padding: 10px;
+			border: 3px solid red;
+		}
+
+		mi-boton, mi-boton-2 {
+			display: block;
+			margin-bottom: 10px;
+		}
+	</style>
+
+	<script>
+		class MiBoton extends HTMLElement {
+			constructor () {
+				super();
+				this.addEventListener('click', (event) => {
+					console.log(this.innerHTML);
+				});
+			}
+		}
+		customElements.define('mi-boton', MiBoton);
+
+		customElements.define('mi-boton-2', class extends HTMLElement {
+			constructor () {
+				super();
+				this.addEventListener('click', (event) => {
+					console.log(this.innerHTML);
+				});
+			}
+		});
+	</script>
+</body>
+</html>

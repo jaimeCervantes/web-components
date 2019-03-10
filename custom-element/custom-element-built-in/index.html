@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web Components: Extending a built-in element</title>
+</head>
+<body>
+	<button is="mi-boton-extendido">Mi boton extendido</button>
+	
+	<div id="container"></div>
+	
+	<script>
+		class MiBotonExtendido extends HTMLButtonElement {
+			constructor () {
+				super();
+				this.addEventListener('click', (e) => {
+					console.log(this.innerHTML);
+				});
+			}
+		}
+
+		customElements.define('mi-boton-extendido', MiBotonExtendido, { extends: 'button' });
+
+		const miBotonExtendido = document.createElement('button', { is: 'mi-boton-extendido' });
+
+		miBotonExtendido.textContent = 'Soy un mi-boton-extendido';
+		miBotonExtendido.setAttribute('is', 'mi-boton-extendido');
+		document.body.appendChild(miBotonExtendido);
+
+		const miBotonExtendido2 = document.createElement('button', { is: 'mi-boton-extendido' });
+		miBotonExtendido2.textContent = 'HOLA';
+		document.querySelector('#container').appendChild(miBotonExtendido2);
+	</script>
+</body>
+</html>
