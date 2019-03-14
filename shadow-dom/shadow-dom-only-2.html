@@ -9,6 +9,7 @@
   <script>
     (function(){
       const button = document.getElementById('test');
+      // Un boton no soporta agregarle shadow DOM, nos dara un DOM Exception Error
       const buttonRoot = button.attachShadow({ mode: 'open' });
       buttonRoot.innerHTML = '<style>' +
                               ':host { text-transform: uppercase; }' +

@@ -35,11 +35,13 @@
     ;(function() {
        'use strict';
 
-      var tpl = document.getElementById('tpl');
-      var host = document.getElementById('host');
-      var shadowDom = host.attachShadow({ mode: 'open' });
-      var content = tpl.content.cloneNode(true)
-      shadowDom.appendChild(content);
+      const tpl = document.getElementById('tpl');
+      const host = document.getElementById('host');
+      const shadowRoot = host.attachShadow({ mode: 'open' });
+      const content = tpl.content.cloneNode(true)
+      shadowRoot.appendChild(content);
+      // host === shadowRoot.host
+      // host.shadowRoot === shadowRoot
      }()); 
   </script>
 </body>

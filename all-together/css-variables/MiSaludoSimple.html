@@ -1,0 +1,95 @@
+<link rel="import" href="../MiBase.html">
+
+<template id="mi-saludo-simple">
+	<style>
+		/* :host hace referencia al nuevo elemento (custom element) en cuestion al cual se le aplica shadow DOM*/
+		:host {
+			display: block;
+			padding: var(--mi-saludo-simple-space, 20px);
+			border: var(--mi-saludo-simple-border, 1px solid green);
+			margin-bottom: var(--mi-saludo-simple-space, 20px);
+			color: var(--mi-saludo-simple-color, blue);
+		}
+
+		h1 {
+			font-size: var(--mi-saudo-simple-heading-size, 16px);
+		}
+
+		/*
+			For some reason this needs to be placed before any :host(<selector>) rule to work;
+			selector anidado no es aceptado, por ejemplo: :host-context(body .secondary-theme);
+		*/
+		:host-context(.secondary-theme) {
+			background: black;
+			color: white;
+		}
+
+		/* Estilos aplicados cuando el custom element tiene el atributo disabled*/
+		:host([disabled]) {
+			pointer-events: none;
+			background: gray;
+			opacity: 0.6;
+		}
+
+		/*
+			Esto no es posible, el :host es para el nuevo elemento en cuestion;
+		*/
+		:host(h2) {
+			background-color: orange;
+		}
+
+		#secondary ::slotted(h2) {
+			color: orange;
+			border: 2px solid green;
+		}
+
+		/*ESTO NO FUCIONA ::sloted solo puede aplciar estilos a elementos inmediatamente hijos del slot, no a los nietos*/
+		#secondary ::slotted(h2 span) {
+			color: red;
+		}
+
+
+		/* Aplica estilos solo al span interno del shadow DOM, no a los de light DOM*/
+		span {
+			padding: 30px;
+			font-size: var(--mi-saludo-simple-span-size, 3rem);
+		}
+
+		:host(.secondary-theme) span {
+			color: white;
+		}
+
+		/*
+			Aplica estilos a los elementos inmediatos dentro de un slot, este tipo de light DOM
+			sigue tienendo los estilos exteriores mas los aplicados con ::slotted dentro del shadow DOM
+		*/
+		::slotted(span) {
+			display: block;
+			border: 3px solid blue;
+		};
+	</style>
+	<div>
+		<h1>Saludo</h1>
+	</div>
+	<slot></slot>
+	<div id="secondary">
+		<slot name="secondary">
+			<h1>Title Default</h1>
+		</slot>
+	</div>
+	<span class="white">span.white desde shadow DOM</span>
+</template>
+
+<script>
+	class MiSaludoSimple extends MiBase {
+		constructor () {
+			super();
+		}
+
+		static get is () {
+			return 'mi-saludo-simple';
+		}
+	}
+
+	customElements.define(MiSaludoSimple.is, MiSaludoSimple);
+</script>

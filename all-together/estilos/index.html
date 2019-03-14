@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mi saludo simple</title>
+	<link rel="import" href="./MiSaludoSimple.html">
+	<style>
+		span {
+			color: red;
+		}
+
+		.container {
+			font-size: 8px; /* Solo estilos que soportan herencia, pueden pasar a traves del shadow DOM*/
+			padding: 20px; /* Este estilo no soporta herencia*/
+		}
+	</style>
+</head>
+<body>
+	<h1>Aplicando estilos con :host, :host-context, ::slotted</h1>	
+
+	<div class="container"><mi-saludo-simple>Este elemento esta dentro de .container</mi-saludo-simple></div>
+	
+	<div class="container">
+		<mi-saludo-simple>
+			<h1>Hola desde slot default</h1>
+			<h2 slot="secondary">Hola desde slot secundario
+				<span class="red">span.red desde light DOM</span>
+			</h2>
+			<span>
+				span, Light DOM insertado en el slot default, no imparta el orden en que es agregado, se inserta en la posicion del slot
+			</span>
+		</mi-saludo-simple>
+	</div>
+
+	<div class="secondary-theme">
+		<mi-saludo-simple>
+			<h1>Hola desde slot default</h1>
+			<h2 slot="secondary">Hola desde slot secundario
+				<span class="red">span.red desde light DOM</span>
+			</h2>
+			<span>
+				span, Light DOM insertado en el slot default, no imparta el orden en que es agregado, se inserta en la posicion del slot
+			</span>
+		</mi-saludo-simple>
+	</div>
+
+	<mi-saludo-simple disabled></mi-saludo-simple>
+
+	<h2>Ejercicio</h2>
+	<p>Cambiar el formulario de agregar contacto, para que sea un componente web y se le pueda cambiar de tema a traves de una clase en el body</p>
+</body>
+</html>

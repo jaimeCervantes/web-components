@@ -10,6 +10,8 @@
 
 	<script>
 		class MiMensaje extends HTMLElement {
+
+			// Usado para setear estado o valores default del elemento, crear shadow DOM y agregar eventos
 			constructor() {
 				super();
 				console.log('constructor: cuando el elemento es creado');
@@ -19,6 +21,8 @@
 				return ['msj', 'casi-visible'];
 			}
 
+			// Este callback se ejecuta cada vez que se cambia un atributo, si la funcion "set"
+			// de una propiedad tambien modifica el atributo, tambien se ejectua
 			attributeChangedCallback(attrName, oldValue, newValue) {
 				if (attrName === 'msj') {
 					this.innerHTML = newValue;
@@ -27,6 +31,21 @@
 				if (attrName === 'casi-visible') {
 					this.setCasiVisible();
 				}
+
+				console.log('attributeChangedCallback: cuando cambia un atributo');
+			}
+
+			// Se ejecuta cuando el elemento es insertado en el DOM, se utiliza para codigo que hace
+			// peticiones a servicios, acceder a elementos del shadow DOM y para renderizar HTML,
+			// la mayoria del trabajo inicial debera estar aqui, p
+			connectedCallback () {
+				console.log('connectedCallback: cuando el elemento es insertado en el DOM');
+			}
+
+			// Se ejecuta cuando el elemento es elimando del arbol del DOM, util para codigo de limpieza
+			// como eliminar listeners o items del localStorage relacionados a este elemento
+			disconnectedCallback () {
+				console.log('disconnectedCallback: cuando el elemento es eliminado del DOM');
 			}
 
 			setCasiVisible() {

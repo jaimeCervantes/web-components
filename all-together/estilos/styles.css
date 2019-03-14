@@ -1,0 +1,64 @@
+/* :host hace referencia al nuevo elemento (custom element) en cuestion al cual se le aplica shadow DOM*/
+:host {
+	/* all: initial; */ /*Para resetear los estilos que se heredan */
+	display: block;
+	padding: 20px;
+	border: 1px solid green;
+	margin-bottom: 10px;
+	color: blue;
+}
+
+h1 {
+	/* Estilos que se heredan como font-size atraviesan el shadow DOM*/
+	font-size: unset; /*Herencia de estilos, inherit, initial y unset*/
+}
+
+/*
+	Lost :host-context deben ponerse antes de los  :host(<selector>) para que puedan funcionar;
+	selector anidado no es aceptado, por ejemplo: :host-context(body .secondary-theme);
+*/
+:host-context(.secondary-theme) {
+	background: black;
+	color: white;
+}
+
+/* Estilos aplicados cuando el custom element tiene el atributo disabled*/
+:host([disabled]) {
+	pointer-events: none;
+	background: gray;
+	opacity: 0.6;
+}
+
+/*
+	Esto no es posible, el :host es para el nuevo elemento en cuestion;
+*/
+:host(h2) {
+	background-color: orange;
+}
+
+#secondary ::slotted(h2) {
+	color: orange;
+	border: 2px solid green;
+}
+
+/*ESTO NO FUCIONA ::sloted solo puede aplciar estilos a elementos inmediatamente hijos del slot, no a los nietos*/
+#secondary ::slotted(h2 span) {
+	color: red;
+}
+
+/* Aplica estilos solo al span interno del shadow DOM, no a los de light DOM*/
+span {
+	padding: 30px;
+	color: white;
+	font-size: 3rem;
+}
+
+/*
+	Aplica estilos a los elementos inmediatos dentro de un slot, este tipo de light DOM
+	sigue tienendo los estilos exteriores mas los aplicados con ::slotted dentro del shadow DOM
+*/
+::slotted(span) {
+	display: block;
+	border: 3px solid blue;
+};
+

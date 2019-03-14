@@ -1,3 +1,5 @@
+<link rel="import" href="./MiBase.html">
+
 <template>
 	<h1>{{msg}}</h1>
 	{{extra-comment}}
@@ -5,58 +7,17 @@
 </template>
 
 <script>
-class MiBase extends HTMLElement {
-  constructor () {
-    super();
-    this.template = this.getTemplate(this.localName);
-    this.shadowDom = this.attachShadow({ mode: 'open' });
-    this.props = this.getProps(this.attributes);
-  }
-
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    this.props = this.props.map(attr => {
-      if (attr.name === attrName) {
-        return { name: attrName, value: newVal };
-      }
-
-      return attr
-    });
-
-    this.shadowDom.innerHTML = this.render(this.template, this.props);
-  }
-
-  getTemplate (localName) {
-    const link = document.querySelector(`link#${localName}[rel="import"]`);
-    const tpl = link.import.querySelector('template');
-
-    return tpl.innerHTML;
-  }
-
-  getProps (attributes) {
-    // set Attributes as props to future interpolation
-    return Array.from(attributes).map(attr => {
-      return { name: attr.name, value: attr.value };
-    });
-  }
-
-  render (stringTemplate, props) {
-    return props.reduce((acc, current) => {
-      return acc.replace(`{{${current.name}}}`, current.value);
-    }, stringTemplate);
-  }
-}
-
 class MiSaludo extends MiBase {
   constructor () {
     super();
   }
 
-  static get ceName () {
+  static get is () {
     return 'mi-saludo';
   }
 
   static get observedAttributes () {
-    return ['saludo', 'extra-comment'];
+    return ['msg', 'extra-comment'];
   }
 
   get msg () {
@@ -75,5 +36,5 @@ class MiSaludo extends MiBase {
     this.setAttribute('extra-comment', value);
   }
 }
-customElements.define(MiSaludo.ceName, MiSaludo);
+customElements.define(MiSaludo.is, MiSaludo);
 </script>

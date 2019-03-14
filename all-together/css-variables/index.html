@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mi saludo simple</title>
+	<link rel="import" id="mi-saludo-simple" href="./MiSaludoSimple.html">
+	<style>
+		html {
+			/*Definir los valores de las variables utilizadas en los web components desde un elemento padre*/
+			--mi-saludo-simple-space: 50px;
+			--mi-saudo-simple-heading-size: 3rem;
+		}
+
+		span {
+			color: red;
+		}
+		
+		.container {
+			/*Definir los valores de las variables utilizadas en los web components desde un elemento padre*/
+			--mi-saludo-simple-space: 10px;
+			--mi-saudo-simple-heading-size: 5rem;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Aplicando css variables</h1>
+
+	<mi-saludo-simple>
+		<h1>Hola desde slot default</h1>
+		<h2 slot="secondary">Hola desde slot secundario
+			<span class="red">span.red desde light DOM slot</span>
+		</h2>
+		<span>
+			span, Light DOM insertado en el slot default, no imparta el orden en que es agregado, se inserta en la posicion del slot
+		</span>
+	</mi-saludo-simple>
+	
+	<div class="container">
+		<mi-saludo-simple>
+			<h1>Hola desde slot default</h1>
+			<h2 slot="secondary">Hola desde slot secundario
+				<span class="red">span.red desde light DOM</span>
+			</h2>
+			<span>
+				span, Light DOM insertado en el slot default, no imparta el orden en que es agregado, se inserta en la posicion del slot
+			</span>
+		</mi-saludo-simple>
+	</div>
+
+		<div class="secondary-theme">
+			<mi-saludo-simple>
+				<h1>Hola desde slot default</h1>
+				<h2 slot="secondary">Hola desde slot secundario
+					<span class="red">span.red desde light DOM</span>
+				</h2>
+				<span>
+					span, Light DOM insertado en el slot default, no imparta el orden en que es agregado, se inserta en la posicion del slot
+				</span>
+			</mi-saludo-simple>
+		</div>
+</body>
+</html>

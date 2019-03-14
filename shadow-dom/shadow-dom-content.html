@@ -12,7 +12,9 @@
   <script>
     (function(){
       const div = document.getElementById('test');
+      // divRoot es el elemento raiz del nuevo shadow DOM
       const divRoot = div.attachShadow({ mode: 'open' });
+      // div.shadowRoor === divRoot
       divRoot.innerHTML = `<style>
                             span { color: red;}
                           </style>

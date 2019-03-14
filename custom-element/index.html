@@ -6,9 +6,23 @@
 	<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+	<h1>Custom Elements</h1>
 	<ul>
 	  <li><a href="./custom-element-basic/index.html">Basic custom element</a></li>
 	  <li><a href="./custom-element-built-in/index.html">Built-in custom element</a></li>
 	</ul>
+
+	<h2>Ejericio</h2>
+		<p>
+			Crear un custom element de un grupo de botones, los cuales sean aceptar, cancelar y cerrar.
+		</p>
+		<ol>
+			<li>El boton de aceptar debe mandar un CustomEvent llamado "onAccept"</li>
+			<li>El boton de cancelar debe mandar un CustomEvent llamado "onCancel"</li>
+			<li>El boton de cerrar debe mandar un CustomEvent llamado "onClose"</li>
+		</ol>
+		<p>Esos eventos deben ser escuchados desde la pagina principal</p>
+		<p>Si es necesario, ocupa shadow DOM para agregar el grupo de botones</p>
+
 </body>
 </html>
