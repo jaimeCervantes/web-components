@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shadow DOM: Custom Event</title>
+</head>
+<body>
+	<test-custom-event></test-custom-event>
+	<script>
+		class TestCustomEvent extends HTMLElement {
+			constructor () {
+				super();
+				this.attachShadow({ mode: 'open' })
+				this.shadowRoot.innerHTML = `
+					<p>Custom events</p>
+					<button>Dame Click</button>
+				`;
+
+				this.shadowRoot.querySelector('button')
+					.addEventListener('click', this.onclickHandler)
+			}
+
+			onclickHandler (e) {
+				console.log(e);
+				const onclickHandler = new CustomEvent('onclickHandler', {
+					bubbles: true, // Hacer bubleling para llegar hasta el elemento raiz
+					composed: true // Pasar mas alla de los limites del Shadow DOM
+				});
+
+				this.dispatchEvent(onclickHandler);
+			}
+		}
+
+		customElements.define('test-custom-event', TestCustomEvent);
+
+		// Si agremos las propieades bubbles: true y composed: true, este handler debe ejecutarse,
+		// prueba comentar estas dos propiedades para comprobar el comportamiento contrario
+		document.addEventListener('onclickHandler', (e) => {
+			console.log(e);
+		});
+	</script>
+</body>
+</html>

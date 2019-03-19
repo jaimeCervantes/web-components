@@ -3,8 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Web components: All together</title>
-	<script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-	<link rel="import" id="mi-saludo" href="./MiSaludo.html">
+	<link rel="import" id="mi-saludo" href="./mi-saludo.html">
 </head>
 <body>
 	<h1>Usando custom elements, html imports, shadow DOM y tempate</h1>
@@ -12,9 +11,13 @@
 	<p>Crear un componente web, que use template, shadow DOM y tenga estilos para mostrar un Saludo de color Rojo y un comentario extra abajo del saludo</p>
 
 
-	<mi-saludo msg="Buenos días!!" extra-comment="¿Como estas?">Soy un mi-saludo</mi-saludo>
+	<mi-saludo msg="Buenos días!!" extra-comment="¿Como estas?">
+		<h1>Soy un mi-saludo</h1>
+	</mi-saludo>
 
 	<h2>Ejercicio</h2>
-	<p>Crear un componente que reciba como propiedades una imagen y un texto de descripcion de la imagen de tal manera que el resultado final debe ser la imagen centrado y el texto de descripcion abajo de la imagen y centrado tambien.</p>
+	<p>Crear un componente que reciba como propiedades una imagen y un texto de caption de la imagen de tal manera que el resultado final debe ser la imagen centrado y el texto de caption abajo de la imagen y centrado tambien.</p>
+
+	<p>Ademas que contenga el componente mi-saludo</p>
 </body>
 </html>

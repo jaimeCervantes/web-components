@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shadoiw DOM con template</title>
+</head>
+<body>
+	<template id="tpl">
+		<style>
+			:host {
+				display: flex;
+			}
+
+			figure {
+				text-align: center;
+			}
+		</style>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ad, mollitia. Consectetur earum quasi quod molestias dolorum ab cupiditate esse impedit, ipsa neque temporibus, praesentium error maiores magnam ullam est.</p>
+		<figure>
+			<img src="https://i0.wp.com/blog.hostdime.com.co/wp-content/uploads/nodejs-servidor.png" alt="">
+			<figcaption>JavaScript</figcaption>
+		</figure>
+	</template>
+
+	<div id="host"></div>
+
+	<script>
+		const tpl = document.querySelector('#tpl');
+		const host = document.querySelector('#host');
+		const tplInst = tpl.content.cloneNode(true);
+		const shadowRoot = host.attachShadow({ mode: 'open' });
+
+		shadowRoot.appendChild(tplInst);
+	</script>
+</body>
+</html>

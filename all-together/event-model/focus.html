@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shadow DOM: Event Model</title>
+</head>
+<body>
+	<style>
+		:focus {
+			border: 5px solid red;
+		}
+	</style>
+	
+	<test-event-model></test-event-model>	
+
+	<script>
+		class TestEventModel extends HTMLElement {
+			constructor () {
+				super()
+				this.attachShadow({
+					mode: 'open'
+					// , delegatesFocus: true // cuando utilizas delegatesFocus y das click sobre un elemento que no es focusable, el primer elemento focusable se activa,
+					// Tambien cuando enfocas un elemento focusable, el :focus tambien se aplica el elemento host del shadow DOM, es decir, a nuestro Custom Element
+				});
+				this.shadowRoot.innerHTML = `
+					<style>
+						:host  {
+							display: block;
+						}
+						input {
+							padding: 10px;
+						}
+
+						input:focus {
+							border: 5px solid green;
+						}
+					</style>
+					<p>Area que no es Focusable</p>
+					<label>
+						Enfoca el input
+						<input type="email" name="" value="" placeholder="Escribe tu email">
+						<input type="text" name="" value="" placeholder="Enfoca el cursor en este campo">
+					</label>
+				`;
+
+				this.addEventListener('focus', (e) => {
+					console.log(e);
+					console.log(e.composedPath());
+					console.log(document.activeElement); // El active element es el custom element
+					console.log(this.shadowRoot.activeElement); // Pero si revisamos el shadow DOM, podemos ver el original active element
+				})
+			}
+		}
+
+		customElements.define('test-event-model', TestEventModel);
+	</script>
+</body>
+</html>

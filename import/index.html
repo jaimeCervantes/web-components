@@ -2,36 +2,13 @@
 <html>
 <head>
 	<title>Web components: import</title>
-	<script>
-		(function(){
-			if('registerElement' in document
-				&&'import' in document.createElement('link')
-				&& 'content' in document.createElement('template')) {
-			} else {
-				//polyfill the platform
-				var scriptPolyfill = document.createElement('script');
-				scriptPolyfill.src = './node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js';
-				document.body.appendChild(scriptPolyfill);
-			}
-		})();
-	</script>
-	<script>
-		const handleLoad = function(e) {
-			console.log("Loaded import: " + e.target.href );
-			console.log(e);
-		};
-
-		var handleError = function(e){
-			console.log("Error loading import: " + e.target.href );
-			console.log(e);
-		}
-	</script>
-	<link onload="handleLoad(event)" onerror="handleError(event)" rel="import" href="./bootstrap.html">
+	<link rel="import" href="./bootstrap.html">
 </head>
 <body>
 	<h1>Imports</h1>
 	<p>Check the console for information about the import status</p>
-
+	
+	<button class="btn btn-primary">Boton Primario</button>
 	<h2>Ejercicio</h2>
 	<p>Utilizar HTML import para cargar todo lo necesario para presentar un boton de <a href="https://getmdl.io/started/index.html" target="_blank">material design lite</a></p>
 </body>

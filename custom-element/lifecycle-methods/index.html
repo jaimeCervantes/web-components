@@ -21,8 +21,8 @@
 				return ['msj', 'casi-visible'];
 			}
 
-			// Este callback se ejecuta cada vez que se cambia un atributo, si la funcion "set"
-			// de una propiedad tambien modifica el atributo, tambien se ejectua
+			// Este callback se ejecuta cada vez que se cambia un atributo listado en listados en observedAttributes, si la funcion "set"
+			// de una propiedad tambien modifica el atributo listado, tambien se ejecuta
 			attributeChangedCallback(attrName, oldValue, newValue) {
 				if (attrName === 'msj') {
 					this.innerHTML = newValue;

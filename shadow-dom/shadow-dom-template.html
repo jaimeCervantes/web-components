@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web components: Shadow Dom template</title>
+  <title>Web components: Shadow DOM template</title>
   <style>
-    #host h1{
+    #host h1 {
       color: blue;
     }
   </style>
@@ -32,17 +32,13 @@
   </div>
   
   <script>
-    ;(function() {
-       'use strict';
-
       const tpl = document.getElementById('tpl');
       const host = document.getElementById('host');
-      const shadowRoot = host.attachShadow({ mode: 'open' });
+      const shadowRoot = host.attachShadow({ mode: 'open'});
       const content = tpl.content.cloneNode(true)
       shadowRoot.appendChild(content);
-      // host === shadowRoot.host
-      // host.shadowRoot === shadowRoot
-     }()); 
+      console.log(host === shadowRoot.host);
+      console.log(host.shadowRoot.querySelector('h1'), shadowRoot);
   </script>
 </body>
 </html>

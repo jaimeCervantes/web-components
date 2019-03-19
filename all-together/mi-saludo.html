@@ -1,0 +1,46 @@
+<link rel="import" href="./mi-base.html">
+
+<template>
+  <style>
+    :host {
+      display: block;
+      border: 1px solid green;
+    }  
+  </style>
+	<h1>{{msg}}</h1>
+	{{extra-comment}}
+	<slot></slot>
+</template>
+
+<script>
+class MiSaludo extends MiBase {
+  constructor () {
+    super();
+  }
+
+  static get is () {
+    return 'mi-saludo';
+  }
+
+  static get observedAttributes () {
+    return ['msg', 'extra-comment'];
+  }
+
+  get msg () {
+    return this.getAttribute('msg');
+  }
+
+  set msg (value) {
+    this.setAttribute('msg', value);
+  }
+
+  get extraComment () {
+    return this.getAttribute('extra-comment');
+  }
+
+  set extraComment (value) {
+    this.setAttribute('extra-comment', value);
+  }
+}
+customElements.define(MiSaludo.is, MiSaludo);
+</script>

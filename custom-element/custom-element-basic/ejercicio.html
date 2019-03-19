@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom element con custom event</title>
+</head>
+<body>
+	<mi-boton>Soy un mi boton con custom event</mi-boton>
+	<mi-boton>Otro</mi-boton>
+	<script>
+		class MiBoton extends HTMLElement {
+			constructor () {
+				super();
+				this.addEventListener('click', () => {
+					this.dispatchEvent(new CustomEvent('guardar', { bubbles: true }));
+				})
+			}
+		}
+
+		customElements.define('mi-boton', MiBoton);
+
+		document.addEventListener('guardar', (e) => {
+			console.log(e)	
+		});
+	</script>
+</body>
+</html>
