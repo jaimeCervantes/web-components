@@ -6,19 +6,22 @@
 	<link rel="import" id="mi-saludo-simple" href="./MiSaludoSimple.html">
 	<style>
 		html {
-			/*Definir los valores de las variables utilizadas en los web components desde un elemento padre*/
+			/* Definir los valores de las variables utilizadas en los web components desde un elemento padre */
 			--mi-saludo-simple-space: 50px;
-			--mi-saudo-simple-heading-size: 3rem;
+			--mi-saludo-simple-heading-size: 3rem;
 		}
 
 		span {
 			color: red;
+			font-size: 8px;
 		}
 		
 		.container {
-			/*Definir los valores de las variables utilizadas en los web components desde un elemento padre*/
+			/*Definir los valores de las variables utilizadas en los web components desde un elemento padre inmediato*/
 			--mi-saludo-simple-space: 10px;
 			--mi-saudo-simple-heading-size: 5rem;
+			font-size: 8px; /* Solo estilos que soportan herencia, pueden pasar a traves del shadow DOM*/
+			color: red; /* Solo estilos que soportan herencia, pueden pasar a traves del shadow DOM*/
 		}
 
 	</style>

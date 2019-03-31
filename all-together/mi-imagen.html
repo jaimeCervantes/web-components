@@ -1,0 +1,50 @@
+<template>
+  <style>
+    :host {
+      display: block;
+      border: 1px solid green;
+    }  
+  </style>
+  <mi-saludo msg="Probando" extra-comment="componente"></mi-saludo>
+	<img src="{{img-src}}" alt="">
+	<slot></slot>
+</template>
+
+<script>
+class MiImagen extends MiBase {
+  constructor () {
+    super();
+    // en el constructor aun no esta mi-saludo renderizado en el DOM
+    // this.shadowRoot.querySelector('mi-saludo').addEventListener('saludo-click', console.log);
+  }
+
+  connectedCallback() {
+    // este si funciona, porque el evento llega o esta aun en el host del shadow Root (mi-saludi)
+    this.shadowRoot.querySelector('mi-saludo').addEventListener('saludo-click', e => {
+      console.log('saludo-click, desde mi-imagen', e)
+    });
+
+    // Este no escucha el evento, por default solo llega hasta el host del shadow DOM (mi-saludo)
+    this.addEventListener('saludo-click', e => {
+      console.log('saludo-click, desde mi-imagen', e)
+    });
+  }
+
+  static get is () {
+    return 'mi-imagen';
+  }
+
+  static get observedAttributes () {
+    return ['img-src'];
+  }
+
+  get imgSrc () {
+    return this.getAttribute('img-src');
+  }
+
+  set imgSrc (value) {
+    this.setAttribute('img-src', value);
+  }
+}
+customElements.define(MiImagen.is, MiImagen);
+</script>

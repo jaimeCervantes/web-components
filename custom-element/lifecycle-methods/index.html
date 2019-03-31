@@ -5,6 +5,13 @@
 	<title>Web components: Lifecycle methods</title>
 </head>
 <body>
+	<style>
+		mi-mensaje {
+			display: block;
+			border: 3px solid red;
+		}
+	</style>
+
 	<mi-mensaje msj="Mi mensaje"></mi-mensaje>
 	<mi-mensaje msj="Mi mensaje" casi-visible></mi-mensaje>
 
@@ -71,7 +78,7 @@
 
 			set casiVisible (value) {
 				if (value) {
-					this.setAttribute('casi-visible', true);
+					this.setAttribute('casi-visible', '');
 					return;
 				}
 
@@ -82,16 +89,5 @@
 		// console.log(MiMensaje.observedAttributes);
 		customElements.define('mi-mensaje', MiMensaje);
 	</script>
-
-	<style>
-		mi-mensaje {
-			display: block;
-			border: 3px solid red;
-		}
-
-		mi-mensaje[casi-visible] {
-			border: 3px solid red;
-		}
-	</style>
 </body>
 </html>

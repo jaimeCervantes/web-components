@@ -35,14 +35,22 @@
 		class MiBoton extends HTMLElement {
 			constructor () {
 				super();
-				this.escucharEventos()
+				this.escucharEventos();
 			}
 
 			escucharEventos () {
-				this.addEventListener('click', (event) => {
-					console.log(this.innerHTML);
-					console.log(event);
+				this.addEventListener('click', function (event) {
+					const miEvento = new CustomEvent('mi-evento', {
+						bubbles: true,
+						detail: {
+							nombre: 'Jaime',
+							apellido: 'Cervantes'
+						}
+					});
+
+					this.dispatchEvent(miEvento);
 				});
+
 			}
 		}
 		customElements.define('mi-boton', MiBoton);
@@ -51,11 +59,18 @@
 		customElements.define('mi-boton-2', class extends HTMLElement {
 			constructor () {
 				super();
+				
 				this.addEventListener('click', () => {
-					console.log(this.innerHTML);
+					console.log('uno');
+				});
+
+				this.addEventListener('click', () => {
+					console.log('dos');
 				});
 			}
 		});
+
+		document.addEventListener('mi-evento', console.log);
 	</script>
 	<p>Crear un custom element con un Custom Event que se llame "guardar", para probar este custom event recuerda que debes escucharlo</p>
 </body>

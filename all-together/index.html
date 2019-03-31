@@ -3,21 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Web components: All together</title>
+	<link rel="import" href="./mi-base.html">
 	<link rel="import" id="mi-saludo" href="./mi-saludo.html">
+	<link rel="import" id="mi-imagen" href="./mi-imagen.html">
 </head>
 <body>
 	<h1>Usando custom elements, html imports, shadow DOM y tempate</h1>
 	<h2>Ejercicio</h2>
 	<p>Crear un componente web, que use template, shadow DOM y tenga estilos para mostrar un Saludo de color Rojo y un comentario extra abajo del saludo</p>
-
-
-	<mi-saludo msg="Buenos días!!" extra-comment="¿Como estas?">
-		<h1>Soy un mi-saludo</h1>
-	</mi-saludo>
+	
+	<mi-saludo msg="Hola" extra-comment="¿Como estas?"></mi-saludo>
+	
 
 	<h2>Ejercicio</h2>
-	<p>Crear un componente que reciba como propiedades una imagen y un texto de caption de la imagen de tal manera que el resultado final debe ser la imagen centrado y el texto de caption abajo de la imagen y centrado tambien.</p>
+	<p>Crear un componente que reciba como propiedades una imagen(url) y un texto de caption de la imagen de tal manera que el resultado final debe ser la imagen centrado y el texto de caption abajo de la imagen y centrado tambien.</p>
 
-	<p>Ademas que contenga el componente mi-saludo</p>
+	<h2>Ejericio</h2>
+		<p>
+			Crear un custom element de un grupo de botones, los cuales sean aceptar, cancelar y cerrar.
+		</p>
+		<ol>
+			<li>El boton de aceptar debe mandar un CustomEvent llamado "onAccept"</li>
+			<li>El boton de cancelar debe mandar un CustomEvent llamado "onCancel"</li>
+			<li>El boton de cerrar debe mandar un CustomEvent llamado "onClose"</li>
+		</ol>
+		<p>Esos eventos deben ser escuchados desde la pagina principal</p>
+		<p>Si es necesario, ocupa shadow DOM para agregar el grupo de botones</p>
+
+
+	<script>
+		document.addEventListener('saludo-click', e => {
+			console.log('Desde index', e);
+		});
+	</script>
 </body>
 </html>

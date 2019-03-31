@@ -12,29 +12,30 @@
     }
 
     h3 {
-      color: yellow;
+      color: blue;
     }
 
   </style>
-  <div id="test"><h3>Light DOM</h3></div>
+
+  <div id="test">
+    <h3>Light DOM</h3>
+  </div>
+
+  <h3>Soy un H3</h3>
   
   <p class="red">Because we didn't add "&lt;slot&gt;" tags in our shadow dom, "Light DOM" isn't shown</p>
   <script>
-      const div = document.getElementById('test');
-      const divRoot = div.attachShadow({ mode: 'open' });
-      console.log(divRoot.innerHTML);
-      console.log(divRoot.host);
-      console.log(div.shadowRoot.querySelector('.red'));
-      divRoot.innerHTML = `<style>
-                            .red {
-                              color: red;
-                              text-transform: uppercase;
-                            }
-                            </style>
-
-                            <h3 class="red">Shadow DOM</h3>
-                            <slot></slot>
-                            `;
+    const div = document.getElementById('test');
+    const divRoot = div.attachShadow({ mode: 'open' });    
+    divRoot.innerHTML = `<style>
+                          .red {
+                            color: red;
+                            text-transform: uppercase;
+                          }
+                          </style>
+                          <slot></slot>
+                          <h3 class="red">Shadow DOM</h3>
+                          `;
   </script>
 </body>
 </html>

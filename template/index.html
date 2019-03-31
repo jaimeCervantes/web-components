@@ -11,19 +11,41 @@
     </div>
   </template>
   
-  <div id="host"></div>
+  <div id="huesped">
+    
+  </div>
   <script>
-    (function(){
-      const host = document.getElementById("host");
+      const host = document.getElementById("huesped");
       const tpl = document.getElementById("tpl-prueba");
-      /**
-       * "document.importNode" is useful when the node to clone comes from another document, for example an iframe
-       * ¿Is "importNode" a good idea for SSR (Server Side Rendering)? I think it isn´t
-       * const tplInst = document.importNode(tpl.content, true);
-       */
       const tplInst = tpl.content.cloneNode(true);
+      
       host.appendChild(tplInst);
-    })();
+
+      // Ejemplo usando document fragments
+      const df = document.createDocumentFragment();
+
+      // crear elementos con contenido texto
+      const div = document.createElement('div');
+      const h1 = document.createElement('h1');
+      const p = document.createElement('p');
+
+      const p2 = document.createElement('p');
+      p2.textContent = 'Hello';
+      host.appendChild(p2);
+      
+      h1.textContent = 'Hola, template manual';
+      p.textContent = '¿Como estas';
+
+      // Agrego h1 y p al div
+      div.appendChild(h1);
+      div.appendChild(p);
+      
+      //aggrego el div al document framente "df"
+      df.appendChild(div);
+
+      // Agregar document fragmente a la página 
+      host.appendChild(df)
+
   </script>
 
   <h2>Ejercicio</h2>

@@ -5,8 +5,23 @@
 	<title>Shadow DOM: Custom Event</title>
 </head>
 <body>
-	<test-custom-event></test-custom-event>
+	<test-custom-event-padre></test-custom-event-padre>
 	<script>
+		class TestCustomEventPadre extends HTMLElement {
+			constructor () {
+				super();
+				this.attachShadow({ mode: 'open' })
+				this.shadowRoot.innerHTML = `
+					<test-custom-event></test-custom-event>
+				`;
+
+				this.shadowRoot.querySelector('test-custom-event')
+					.addEventListener('custom-click', (e) => {
+						console.log('Desde test-custom-event-padre', e)
+					});
+			}
+		}
+
 		class TestCustomEvent extends HTMLElement {
 			constructor () {
 				super();
@@ -22,20 +37,21 @@
 
 			onclickHandler (e) {
 				console.log(e);
-				const onclickHandler = new CustomEvent('onclickHandler', {
-					bubbles: true, // Hacer bubleling para llegar hasta el elemento raiz
-					composed: true // Pasar mas alla de los limites del Shadow DOM
+				const customEvent = new CustomEvent('custom-click', {
+					// bubbles: true, // Hacer bubleling para llegar hasta el elemento raiz
+					// composed: true // Pasar mas alla de los limites del Shadow DOM
 				});
 
-				this.dispatchEvent(onclickHandler);
+				this.dispatchEvent(customEvent);
 			}
 		}
 
 		customElements.define('test-custom-event', TestCustomEvent);
+		customElements.define('test-custom-event-padre', TestCustomEventPadre);
 
 		// Si agremos las propieades bubbles: true y composed: true, este handler debe ejecutarse,
 		// prueba comentar estas dos propiedades para comprobar el comportamiento contrario
-		document.addEventListener('onclickHandler', (e) => {
+		document.querySelector('test-custom-event-padre').addEventListener('custom-click', (e) => {
 			console.log(e);
 		});
 	</script>

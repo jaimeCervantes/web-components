@@ -32,13 +32,12 @@
   </div>
   
   <script>
-      const tpl = document.getElementById('tpl');
-      const host = document.getElementById('host');
-      const shadowRoot = host.attachShadow({ mode: 'open'});
-      const content = tpl.content.cloneNode(true)
-      shadowRoot.appendChild(content);
-      console.log(host === shadowRoot.host);
-      console.log(host.shadowRoot.querySelector('h1'), shadowRoot);
+    const tpl = document.getElementById('tpl');
+    const host = document.getElementById('host');
+    const shadowRoot = host.attachShadow({ mode: 'open'});
+    const content = tpl.content.cloneNode(true);
+    
+    shadowRoot.appendChild(content);
   </script>
 </body>
 </html>

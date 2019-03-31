@@ -1,4 +1,4 @@
-<link rel="import" href="../MiBase.html">
+<link rel="import" href="../mi-base.html">
 
 <template id="mi-saludo-simple">
 	<style>
@@ -12,11 +12,11 @@
 		}
 
 		h1 {
-			font-size: var(--mi-saudo-simple-heading-size, 16px);
+			font-size: var(--mi-saludo-simple-heading-size, 16px);
 		}
 
 		/*
-			For some reason this needs to be placed before any :host(<selector>) rule to work;
+			Lost :host-context deben ponerse antes de los  :host(<selector>) para que puedan funcionar;
 			selector anidado no es aceptado, por ejemplo: :host-context(body .secondary-theme);
 		*/
 		:host-context(.secondary-theme) {
@@ -54,7 +54,7 @@
 			padding: 30px;
 			font-size: var(--mi-saludo-simple-span-size, 3rem);
 		}
-
+		
 		:host(.secondary-theme) span {
 			color: white;
 		}
