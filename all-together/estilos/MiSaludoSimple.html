@@ -11,10 +11,13 @@
 				</div>
 				<slot></slot>
 				<div id="secondary">
-					<slot name="secondary">
+					<slot name="secondary" new-attr="new">
 						<h1>Title Default</h1>
 					</slot>
 				</div>
+				<slot name="new" new-attr="new">
+					<h1>Title Default</h1>
+				</slot>
 				<span class="white">span.white desde shadow DOM</span>
 			`;
 		}

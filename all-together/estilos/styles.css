@@ -8,6 +8,11 @@
 	color: blue;
 }
 
+/*Para Host esto si es posible*/
+:host(selector) masSelector {
+
+}
+
 h1 {
 	/* Estilos que se heredan como font-size atraviesan el shadow DOM*/
 	font-size: unset; /*Herencia de estilos, inherit, initial y unset*/
@@ -41,9 +46,22 @@ h1 {
 	border: 2px solid green;
 }
 
+/* Nativamente ::slotted([attr="value"]) no funciona, polymer le agrega esta funcionalidad*/
+::slotted([name="new"]) {
+	display: block;
+	color: green;
+	font-size: 30px;
+}
+
 /*ESTO NO FUCIONA ::sloted solo puede aplciar estilos a elementos inmediatamente hijos del slot, no a los nietos*/
 #secondary ::slotted(h2 span) {
 	color: red;
+}
+
+/* Esto tampoco es posible, solo los elementos inmediatamente hijos*/
+#secondary ::slotted(h2) span {
+	color: green;
+	font-size: 30px;
 }
 
 /* Aplica estilos solo al span interno del shadow DOM, no a los de light DOM*/
