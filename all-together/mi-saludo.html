@@ -11,54 +11,56 @@
 </template>
 
 <script>
-class MiSaludo extends MiBase {
-  constructor () {
-    super();
-  }
+{
+  class MiSaludo extends APP.Element {
+    constructor () {
+      super();
+    }
 
-  connectedCallback() {
-    // super.connectedCallback();
-    this.shadowRoot.querySelector('h1')
-      .addEventListener('click', e => {
-        this.dispatchEvent(new CustomEvent('saludo-click', {
-          composed: false,
-          bubbles: false
-        }));
-      });
-  }
+    connectedCallback() {
+      // super.connectedCallback();
+      this.shadowRoot.querySelector('h1')
+        .addEventListener('click', e => {
+          this.dispatchEvent(new CustomEvent('saludo-click', {
+            composed: true,
+            bubbles: false
+          }));
+        });
+    }
 
-  static get is () {
-    return 'mi-saludo';
-  }
+    static get is () {
+      return 'mi-saludo';
+    }
 
-  static get observedAttributes () {
-    return ['msg', 'extra-comment'];
-  }
+    static get observedAttributes () {
+      return ['msg', 'extra-comment'];
+    }
 
-  attributeChangedCallback (attrName, oldVal, newVal) {
-    // Cuando sobrescribimos un método de la clase padre y queremos que la funcionalidad de la clase padre aun funcione
-    // correctamente, se debe invocar el método de la clase padre antes que cualquier otra acción para no afectar la funcionalidad
-    // padre y conviva con la nueva funcionalidad agregada al sobreescribir el método
-    super.attributeChangedCallback(attrName, oldVal, newVal);
+    attributeChangedCallback (attrName, oldVal, newVal) {
+      // Cuando sobrescribimos un método de la clase padre y queremos que la funcionalidad de la clase padre aun funcione
+      // correctamente, se debe invocar el método de la clase padre antes que cualquier otra acción para no afectar la funcionalidad
+      // padre y conviva con la nueva funcionalidad agregada al sobreescribir el método
+      super.attributeChangedCallback(attrName, oldVal, newVal);
 
-    // Aqui me codigo de sobreescritura
-  }
+      // Aqui me codigo de sobreescritura
+    }
 
-  get msg () {
-    return this.getAttribute('msg');
-  }
+    get msg () {
+      return this.getAttribute('msg');
+    }
 
-  set msg (value) {
-    this.setAttribute('msg', value);
-  }
+    set msg (value) {
+      this.setAttribute('msg', value);
+    }
 
-  get extraComment () {
-    return this.getAttribute('extra-comment');
-  }
+    get extraComment () {
+      return this.getAttribute('extra-comment');
+    }
 
-  set extraComment (value) {
-    this.setAttribute('extra-comment', value);
+    set extraComment (value) {
+      this.setAttribute('extra-comment', value);
+    }
   }
+  customElements.define(MiSaludo.is, MiSaludo);
 }
-customElements.define(MiSaludo.is, MiSaludo);
 </script>

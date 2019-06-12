@@ -11,40 +11,47 @@
 </template>
 
 <script>
-class MiImagen extends MiBase {
-  constructor () {
-    super();
-    // en el constructor aun no esta mi-saludo renderizado en el DOM
-    // this.shadowRoot.querySelector('mi-saludo').addEventListener('saludo-click', console.log);
-  }
+{
+  class MiImagen extends APP.Element {
+    constructor () {
+      super();
+      // en el constructor aun no esta mi-saludo renderizado en el DOM
+      // this.shadowRoot.querySelector('mi-saludo').addEventListener('saludo-click', console.log);
+    }
 
-  connectedCallback() {
-    // este si funciona, porque el evento llega o esta aun en el host del shadow Root (mi-saludi)
-    this.shadowRoot.querySelector('mi-saludo').addEventListener('saludo-click', e => {
-      console.log('saludo-click, desde mi-imagen', e)
-    });
+    connectedCallback() {
+      // este si funciona, porque el evento llega o esta aun en el host del shadow Root (mi-saludi)
+      // incluso con bubbles: false y composed: false, un evento en el host o en su shadow DOM
+      // llega hasta el host del shadow DOM
+      this.shadowRoot.querySelector('mi-saludo').addEventListener('saludo-click', e => {
+        console.log('saludo-click, desde mi-imagen, click sobre mi saludo', e)
+      });
 
-    // Este no escucha el evento, por default solo llega hasta el host del shadow DOM (mi-saludo)
-    this.addEventListener('saludo-click', e => {
-      console.log('saludo-click, desde mi-imagen', e)
-    });
-  }
+      // Desde el padre solo se dispara si el custom evento tiene composed: true, aun teniendo bubbles: false, el evento
+      // cruza el limite de su shadown DOM y por eso es escuchado por todos los elementos padre
+      // en la cadena de elementos con shadow DOM, tatarabuelo -> bisabuelo -> abuelo -> padre -> YA
+      // Y por el ultimo elemento HOST
+      this.addEventListener('saludo-click', e => {
+        console.log('saludo-click, desde mi-imagen', e)
+      });
+    }
 
-  static get is () {
-    return 'mi-imagen';
-  }
+    static get is () {
+      return 'mi-imagen';
+    }
 
-  static get observedAttributes () {
-    return ['img-src'];
-  }
+    static get observedAttributes () {
+      return ['img-src'];
+    }
 
-  get imgSrc () {
-    return this.getAttribute('img-src');
-  }
+    get imgSrc () {
+      return this.getAttribute('img-src');
+    }
 
-  set imgSrc (value) {
-    this.setAttribute('img-src', value);
+    set imgSrc (value) {
+      this.setAttribute('img-src', value);
+    }
   }
+  customElements.define(MiImagen.is, MiImagen);
 }
-customElements.define(MiImagen.is, MiImagen);
 </script>
