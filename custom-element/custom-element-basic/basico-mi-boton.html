@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    html {
+      font-size: 12px;
+    }
+
+    mi-boton {
+      display: inline-flex;
+      padding: 0.5rem;
+      border: 1px solid teal;
+    }
+  </style>
+  <mi-boton>Soy un mi-boton</mi-boton>
+  
+  <script>
+    {
+
+      function callback(params) {
+        console.log(params);
+      }
+
+      class MiBoton extends HTMLElement {
+        constructor() {
+          super();
+          this.addEventListener('dblclick', function (event) {
+            this.ejecutarCallBack(callback, false);
+          });
+
+          this.addEventListener('mouseover', function() {
+            this.ejecutarCallBack(callback, true, {
+                                                    nombre: 'Fernando',
+                                                    edad: 25
+                                                  });
+          })
+        }
+
+        ejecutarCallBack(callback, bandera, cbp) {
+          if (bandera) {
+            callback(cbp);
+          }
+        }
+      }
+
+      customElements.define('mi-boton', MiBoton);
+    }
+  </script>
+</body>
+</html>
